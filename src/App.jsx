@@ -1,11 +1,7 @@
+import HomePage from "./components/templates/HomePage"
 function App() {
-
   return (
-    <>
-      <div>
-        crypto app
-      </div>
-    </>
+    <HomePage />
   )
 }
 
