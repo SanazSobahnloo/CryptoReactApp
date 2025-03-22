@@ -11,7 +11,9 @@ function HomePage() {
             const json = await res.json()
             setCoins(json)
         }
+        getData();
     }, [])
+    // console.log(coins)
     return (
         <div>
             <TableCoin coins={coins} />
