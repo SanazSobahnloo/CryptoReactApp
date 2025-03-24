@@ -2,7 +2,7 @@ import { RotatingLines } from "react-loader-spinner"
 import chartUp from "../../assets/chart-up.svg"
 import chartDown from "../../assets/chart-down.svg"
 import styles from "./TableCoin.module.css"
-function TableCoin({ coins, isLoading, currency }) {
+function TableCoin({ coins, isLoading, currency, setChart }) {
     console.log(coins)
     return (
         <div className={styles.container}>
@@ -21,7 +21,7 @@ function TableCoin({ coins, isLoading, currency }) {
                     </thead>
                     <tbody>
                         {coins.map(coin =>
-                            <TableRow coin={coin} key={coin.id} currency={currency} />
+                            <TableRow coin={coin} key={coin.id} currency={currency} setChart={setChart} />
                         )}
                     </tbody>
                 </table>
@@ -32,7 +32,7 @@ function TableCoin({ coins, isLoading, currency }) {
 
 export default TableCoin;
 
-const TableRow = ({ currency, coin: { name, image, symbol, total_volume, current_price, price_change_percentage_24h: price_change } }) => {
+const TableRow = ({ setChart, currency, coin: { name, image, symbol, total_volume, current_price, price_change_percentage_24h: price_change } }) => {
     const getCurrencySymbol = (currency) => {
         switch (currency) {
             case 'usd':
@@ -45,11 +45,13 @@ const TableRow = ({ currency, coin: { name, image, symbol, total_volume, current
                 return '$'
         }
     }
-
+    const showHandler = () => {
+        setChart(true)
+    }
     return (
         <tr>
             <td>
-                <div className={styles.symbol}>
+                <div className={styles.symbol} onClick={showHandler}>
                     <img src={image} alt={name} />
                     <span>{symbol.toUpperCase()}</span>
                 </div>
